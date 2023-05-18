@@ -31,14 +31,16 @@ async function run() {
 
     app.get('/alltoys/:orders',async(req,res)=>{
         const order =req.params.orders;
-       
+        const limitquery = parseInt(req.query.limit)
+    
+        console.log(limitquery);
         if(order=== 'true'){
-            const toys = await toysCollection.find({}).sort({createdAt: 1}).toArray()
+            const toys = await toysCollection.find({}).sort({createdAt: 1}).limit(limitquery).toArray()
             res.send(toys)
         }
 
        else if(order==='false'){
-        const toys = await toysCollection.find({}).sort({createdAt: -1}).toArray()
+        const toys = await toysCollection.find({}).sort({createdAt: -1}).limit(limitquery).toArray()
         res.send(toys)
        }
         

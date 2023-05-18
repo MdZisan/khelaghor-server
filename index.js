@@ -29,10 +29,28 @@ async function run() {
 
     const toysCollection = client.db("toysMarket").collection("toys")
 
+    app.get('/alltoys/:orders',async(req,res)=>{
+        const order =req.params.orders;
+       
+        if(order=== 'true'){
+            const toys = await toysCollection.find({}).sort({createdAt: 1}).toArray()
+            res.send(toys)
+        }
+
+       else if(order==='false'){
+        const toys = await toysCollection.find({}).sort({createdAt: -1}).toArray()
+        res.send(toys)
+       }
+        
+
+
+    })
+
     app.post('/addtoy',async(req,res)=>{
         const body = req.body
         body.createdAt = new Date();
-        console.log(body);
+        const result = await toysCollection.insertOne(body);
+        res.status(200).send(result);
 
     })
 

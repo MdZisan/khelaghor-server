@@ -91,7 +91,19 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
     app.put('/updateData/:id',async(req,res)=>{
       const id = req.params.id;
       const updateBody = req.body;
-      console.log(id,updateBody);
+      // console.log(id,updateBody);
+      const filter = {_id: new ObjectId(id)};
+      const option = {upsert:true};
+      const updateDoc ={
+        $set:{
+          price: updateBody.price,
+          quantity: updateBody.quantity,
+          details: updateBody.details
+        }
+      }
+      const result = await toysCollection.updateOne(filter,updateDoc,option);
+      res.send(result)
+
     })
 
 

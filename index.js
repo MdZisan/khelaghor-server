@@ -80,6 +80,19 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
         res.send(result)
     })
 
+    app.get('/toys/:categroy',async(req,res)=>{
+
+      const categroy = req.params.categroy;
+      console.log(categroy);
+      const result = await toysCollection.find({category: categroy}).toArray();
+      res.send(result)
+
+
+
+
+    })
+
+
     app.post('/addtoy',async(req,res)=>{
         const body = req.body
         body.createdAt = new Date();

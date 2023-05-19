@@ -40,12 +40,12 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
     
         // console.log(limitquery);
         if(order=== 'true'){
-            const toys = await toysCollection.find({}).sort({createdAt: 1}).limit(limitquery).toArray()
+            const toys = await toysCollection.find({}).sort({price: 1}).limit(limitquery).toArray()
             res.send(toys)
         }
 
        else if(order==='false'){
-        const toys = await toysCollection.find({}).sort({createdAt: -1}).limit(limitquery).toArray()
+        const toys = await toysCollection.find({}).sort({price: -1}).limit(limitquery).toArray()
         res.send(toys)
        }
         

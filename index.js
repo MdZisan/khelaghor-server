@@ -106,6 +106,15 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
 
     })
 
+    app.delete('/deleteToy/:id',async(req,res)=>{
+
+      const id = req.params.id;
+      const result= await toysCollection.deleteOne({_id: new ObjectId(id)});
+      res.send(result)
+
+
+    })
+
 
     // FOR TEST 
     app.get('/test',async(req,res)=>{

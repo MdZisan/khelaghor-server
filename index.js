@@ -38,7 +38,7 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
         const order =req.params.orders;
         const limitquery = parseInt(req.query.limit)
     
-        console.log(limitquery);
+        // console.log(limitquery);
         if(order=== 'true'){
             const toys = await toysCollection.find({}).sort({createdAt: 1}).limit(limitquery).toArray()
             res.send(toys)
@@ -67,6 +67,19 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
 
     })
 
+
+    app.get('/toy/:id',async(req,res)=>{
+      const id = req.params.id;
+      const result=await toysCollection.findOne({_id: new ObjectId(id)});
+      res.send(result)
+    })
+
+    app.get('/mytoy/:email',async(req,res)=>{
+      const email = req.params.email;
+        const result= await toysCollection.find({email: email}).toArray();
+        res.send(result)
+    })
+
     app.post('/addtoy',async(req,res)=>{
         const body = req.body
         body.createdAt = new Date();
@@ -75,6 +88,17 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
 
     })
 
+    app.put('/updateData/:id',async(req,res)=>{
+      const id = req.params.id;
+      const updateBody = req.body;
+      console.log(id,updateBody);
+    })
+
+
+    // FOR TEST 
+    app.get('/test',async(req,res)=>{
+      res.send('server working')
+    })
 
 
 

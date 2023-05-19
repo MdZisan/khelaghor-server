@@ -83,13 +83,23 @@ const result= await toysCollection.createIndex(indexKeys,indexOptions)
     app.get('/toys/:categroy',async(req,res)=>{
 
       const categroy = req.params.categroy;
-      console.log(categroy);
+      // console.log(categroy);
       const result = await toysCollection.find({category: categroy}).toArray();
       res.send(result)
 
+    })
+    app.get('/toyphoto',async(req,res)=>{
 
-
-
+      const query={};
+      const options = {
+        projection:{
+          toyphoto:1,
+          name:1,price:1
+        }
+      }
+      const result= await toysCollection.find(query,options).toArray();
+      res.send(result)
+      
     })
 
 

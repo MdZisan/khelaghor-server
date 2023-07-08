@@ -38,9 +38,9 @@ async function run() {
 
     const toysCollection = client.db("toysMarket").collection("toys")
 
-    const indexKeys ={name:1};
-    const indexOptions = {name:'toyname'}
-const result= await toysCollection.createIndex(indexKeys,indexOptions)
+//     const indexKeys ={name:1};
+//     const indexOptions = {name:'toyname'}
+// const result= await toysCollection.createIndex(indexKeys,indexOptions)
 
 
     app.get('/alltoys/:orders',async(req,res)=>{
